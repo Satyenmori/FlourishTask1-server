@@ -9,3 +9,17 @@ export const createUser = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+export const checkUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const isUser = await User.findOne({ email, password });
+    if (isUser) {
+      res.status(200).json({ msg: "login Successfuly" });
+    } else {
+      res.status(401).json({ msg: " User Not Exist plz Register" });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
