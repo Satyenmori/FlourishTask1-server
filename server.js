@@ -4,21 +4,23 @@ import dotenv from "dotenv";
 import { connDB } from "./utility/db.js";
 import { authRouter } from "./router/Auth.js";
 import { userRouter } from "./router/User.js";
+import { roomRouter } from "./router/Rooms.js";
 
 const app = express();
 dotenv.config();
 
-const corsoption = {
-  origin: "http://localhost:3000",
-  method: "GET,POST,DELETE,HEAD,PATCH,PUT",
-  credentials: true,
-};
-app.use(cors(corsoption));
+// const corsoption = {
+//   origin: "http://localhost:3000",
+//   method: "GET,POST,DELETE,HEAD,PATCH,PUT",
+//   credentials: true,
+// };
+app.use(cors({origin:true}));
 app.use(express.json());
 
 //Router
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/room",roomRouter)
 
 // DB And Port
 connDB().then(() => {
