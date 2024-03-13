@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, require: true, unique: true },
   password: { type: String, require: true },
   phone: { type: Number, require: true },
+  role: { type: String, require: true, default: "user" },
 });
 
 userSchema.methods.genrateToken = async function () {
@@ -14,6 +15,7 @@ userSchema.methods.genrateToken = async function () {
       {
         userId: this._id.toString(),
         email: this.email,
+        role: this.role,
       },
       process.env.JWT_KEY,
       {
