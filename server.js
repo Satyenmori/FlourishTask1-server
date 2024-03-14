@@ -10,13 +10,9 @@ import { adminRouter } from "./router/Admin.js";
 const app = express();
 dotenv.config();
 
-// const corsoption = {
-//   origin: "http://localhost:3000",
-//   method: "GET,POST,DELETE,HEAD,PATCH,PUT",
-//   credentials: true,
-// };
 app.use(cors({ origin: true }));
 app.use(express.json());
+app.use(express.static("uploads"))
 
 //Router
 app.use("/auth", authRouter);

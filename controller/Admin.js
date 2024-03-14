@@ -11,10 +11,13 @@ export const AdminfetchAllroom = async (req, res) => {
 
 export const createRoom = async (req, res) => {
   try {
-    const room = new Room(req.body);
-    const doc = await room.save();
-    res.status(200).json({ msg: "Room is Add" });
+    const images = req.file.filename;    
+    const room = new Room({ ...req.body, images });
+    room.save();
+    res.status(200).json({ msg: "Room is Add successfully" });
   } catch (error) {
-    res.status(500).json("Room is Not Added", error);
+    res
+      .status(500)
+      .json({ error: "Room is Not Added", message: error.message });
   }
 };
