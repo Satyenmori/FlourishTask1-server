@@ -23,4 +23,4 @@ const upload = multer({ storage: storage });
 
 adminRouter
   .get("/", authMiddaleware, isAdmin, AdminfetchAllroom)
-  .post("/addroom", upload.single("images"), createRoom);
+  .post("/addroom", authMiddaleware,isAdmin,upload.single("images"), createRoom);
