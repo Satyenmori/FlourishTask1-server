@@ -12,8 +12,8 @@ const roomsSchema = new mongoose.Schema({
   },
   bed: { type: Number, require: true },
   bath: { type: Number, require: true },
-  wifi: { type: String, require: true },
-  images: { type: String, require: true },
+  wifi: { type: String, require: true },  
+  images: { type: [String], required: true },
 });
 
 

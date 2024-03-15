@@ -17,10 +17,18 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+});
 
 // Router
 
 adminRouter
   .get("/", authMiddaleware, isAdmin, AdminfetchAllroom)
-  .post("/addroom", authMiddaleware,isAdmin,upload.single("images"), createRoom);
+  .post(
+    "/addroom",
+    authMiddaleware,
+    isAdmin,
+    upload.array("images"),
+    createRoom
+  );

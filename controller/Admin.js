@@ -11,9 +11,10 @@ export const AdminfetchAllroom = async (req, res) => {
 
 export const createRoom = async (req, res) => {
   try {
-    const images = req.file.filename;    
+    const images = req.files.map(file=>file.filename);
+    console.log(images);
     const room = new Room({ ...req.body, images });
-    room.save();
+    await room.save();
     res.status(200).json({ msg: "Room is Add successfully" });
   } catch (error) {
     res
