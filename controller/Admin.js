@@ -11,7 +11,7 @@ export const AdminfetchAllroom = async (req, res) => {
 
 export const createRoom = async (req, res) => {
   try {
-    const images = req.files.map(file=>file.filename);
+    const images = req.files.map((file) => file.filename);
     console.log(images);
     const room = new Room({ ...req.body, images });
     await room.save();
@@ -20,5 +20,17 @@ export const createRoom = async (req, res) => {
     res
       .status(500)
       .json({ error: "Room is Not Added", message: error.message });
+  }
+};
+
+// delete Room
+
+export const deleteRooms = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Room.deleteOne({ _id: id });
+    return res.status(200).json({ msg: "Room is delete Successfuly" });
+  } catch (error) {
+    res.status(200).json(error);
   }
 };

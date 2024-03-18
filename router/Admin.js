@@ -1,6 +1,10 @@
 import express from "express";
 import { isAdmin } from "../middleware/isAdmin.js";
-import { AdminfetchAllroom, createRoom } from "../controller/Admin.js";
+import {
+  AdminfetchAllroom,
+  createRoom,
+  deleteRooms,
+} from "../controller/Admin.js";
 import authMiddaleware from "../middleware/auth-middleware.js";
 import multer from "multer";
 
@@ -31,4 +35,5 @@ adminRouter
     isAdmin,
     upload.array("images"),
     createRoom
-  );
+  )
+  .delete("/roomdelete/:id", deleteRooms);
