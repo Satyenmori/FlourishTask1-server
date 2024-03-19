@@ -34,3 +34,32 @@ export const deleteRooms = async (req, res) => {
     res.status(200).json(error);
   }
 };
+
+// Update Room Details
+
+export const updateRoom = async (req, res) => {
+  try {
+    const roomId = req.params.roomId;
+    const images = req.files.map((file) => file.filename);
+    const updates = { ...req.body };
+
+    // check if images exist or not
+    if (Array.isArray(req.body.images)) {
+      updates.images = [...req.body.images, ...images]; 
+    } else if (req.body.images) {
+      updates.images = [req.body.images, ...images];
+    } else {
+      updates.images = images;
+    }
+
+    const room = await Room.findByIdAndUpdate(roomId, updates, { new: true });
+    if (!room) {
+      return res.status(404).json({ error: "Room not found" });
+    }
+    res.status(200).json({ msg: "Room updated successfully", room });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Room could not be updated", message: error.message });
+  }
+};

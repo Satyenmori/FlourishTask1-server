@@ -4,6 +4,7 @@ import {
   AdminfetchAllroom,
   createRoom,
   deleteRooms,
+  updateRoom,
 } from "../controller/Admin.js";
 import authMiddaleware from "../middleware/auth-middleware.js";
 import multer from "multer";
@@ -36,4 +37,5 @@ adminRouter
     upload.array("images"),
     createRoom
   )
-  .delete("/roomdelete/:id", deleteRooms);
+  .delete("/roomdelete/:id", deleteRooms)
+  .put("/editroom/:roomId",upload.array("images"),updateRoom)
