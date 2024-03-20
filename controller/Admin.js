@@ -40,19 +40,18 @@ export const deleteRooms = async (req, res) => {
 export const updateRoom = async (req, res) => {
   try {
     const roomId = req.params.roomId;
-    const images = req.files.map((file) => file.filename);
-    const updates = { ...req.body };
+    
+    const roomm = await Room.findById(roomId);
+    
 
-    // check if images exist or not
-    if (Array.isArray(req.body.images)) {
-      updates.images = [...req.body.images, ...images]; 
-    } else if (req.body.images) {
-      updates.images = [req.body.images, ...images];
-    } else {
-      updates.images = images;
+    // check if new images are uploaded
+    if (req.files.length > 0) {
+      const newImages = req.files.map((file) => file.filename);
+      const updatedImages = roomm.images ? [...roomm.images, ...newImages] : newImages;
+      req.body.images = updatedImages;
     }
 
-    const room = await Room.findByIdAndUpdate(roomId, updates, { new: true });
+    const room = await Room.findByIdAndUpdate(roomId, req.body, { new: true });
     if (!room) {
       return res.status(404).json({ error: "Room not found" });
     }
