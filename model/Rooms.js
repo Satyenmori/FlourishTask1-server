@@ -12,11 +12,11 @@ const roomsSchema = new mongoose.Schema({
   },
   bed: { type: Number, require: true },
   bath: { type: Number, require: true },
-  wifi: { type: String, require: true },  
+  wifi: { type: String, require: true },
   images: { type: [String], required: true },
+  isBooked: { type: Boolean, default: false },
 });
 
-
-const Room=new mongoose.model("Room",roomsSchema);
+const Room = new mongoose.model("Room", roomsSchema);
 
 export default Room;
