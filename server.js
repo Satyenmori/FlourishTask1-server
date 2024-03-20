@@ -21,7 +21,7 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/room", roomRouter);
 app.use("/admin", adminRouter);
-app.use("/bookroom", bookingRouter);
+app.use("/booking", bookingRouter);
 // DB And Port
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
