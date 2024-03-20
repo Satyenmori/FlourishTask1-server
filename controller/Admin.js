@@ -35,6 +35,33 @@ export const deleteRooms = async (req, res) => {
   }
 };
 
+// Delete Image sepretly 
+
+export const deleteImage = async (req, res) => {
+  const { roomId, imageIndex } = req.params;
+
+  try {
+    // Fetch the room by ID
+    const room = await Room.findById(roomId);
+
+    if (!room) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+
+    // Remove the image at the specified index
+    room.images.splice(imageIndex, 1);
+
+    // Save the updated room
+    await room.save();
+
+    res.json({ message: 'Image deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 // Update Room Details
 
 export const updateRoom = async (req, res) => {

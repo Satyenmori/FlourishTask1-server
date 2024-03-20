@@ -3,6 +3,7 @@ import { isAdmin } from "../middleware/isAdmin.js";
 import {
   AdminfetchAllroom,
   createRoom,
+  deleteImage,
   deleteRooms,
   updateRoom,
 } from "../controller/Admin.js";
@@ -38,4 +39,5 @@ adminRouter
     createRoom
   )
   .delete("/roomdelete/:id", deleteRooms)
-  .put("/editroom/:roomId",upload.array("images"),updateRoom)
+  .put("/editroom/:roomId", upload.array("images"), updateRoom)
+  .delete("/deleteimage/:roomId/:imageIndex", deleteImage);
