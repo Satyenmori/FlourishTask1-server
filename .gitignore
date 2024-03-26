@@ -26,3 +26,5 @@ package-lock.json
 package.json
 
 /uploads
+
+/test.js

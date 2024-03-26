@@ -7,7 +7,8 @@ import { userRouter } from "./router/User.js";
 import { roomRouter } from "./router/Rooms.js";
 import { adminRouter } from "./router/Admin.js";
 import { bookingRouter } from "./router/Booking.js";
-
+import { foodRouter } from "./router/Food.js";
+import { categoryRouter } from "./router/Category.js";
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,8 @@ app.use("/user", userRouter);
 app.use("/room", roomRouter);
 app.use("/admin", adminRouter);
 app.use("/booking", bookingRouter);
+app.use("/food", foodRouter);
+app.use("/category", categoryRouter);
 // DB And Port
 connDB().then(() => {
   app.listen(process.env.PORT, () => {
