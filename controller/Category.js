@@ -30,6 +30,8 @@ export const filterCategory = async (req, res) => {
       filter = { category };
     }
     const filterdFoods = await Food.find(filter);
+    const filteredFoodsCount = filterdFoods.length;
+    console.log(filteredFoodsCount);
     res.status(200).json(filterdFoods);
   } catch (error) {
     res.status(500).json(error);
